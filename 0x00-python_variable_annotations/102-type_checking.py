@@ -9,8 +9,6 @@ def zoom_array(lst: Tuple, factor: Optional[int] = 2) -> List[int]:
     """
         Create a new list by repeating each element.
     """
-    if factor is None:
-        factor = 2
     return [i for i in lst for _ in range(factor)]
 
 
