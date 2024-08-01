@@ -2,14 +2,14 @@
 """
     Create a new list by repeating each element
 """
-from typing import Tuple, Optional, List
+from typing import Tuple, List
 
 
-def zoom_array(lst: Tuple, factor: Optional[int] = 2) -> List[int]:
+def zoom_array(lst: Tuple, factor: int = 2) -> List:
     """
         Create a new list by repeating each element.
     """
-    return [i for i in lst for _ in range(factor)]
+    return [i * factor for i in lst]
 
 
 array: Tuple[int, ...] = (12, 72, 91)
