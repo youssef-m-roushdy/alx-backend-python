@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+    Add two float numbers and return the result.
+"""
+
 
 def add(a: float, b: float) -> float:
     """
