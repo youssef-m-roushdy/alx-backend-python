@@ -2,9 +2,10 @@
 """
     Calculate the sum of a list of float numbers.
 """
+from typing import List
 
 
-def sum_list(input_list: list[float]) -> float:
+def sum_list(input_list: List[float]) -> float:
     """
     Calculate the sum of a list of float numbers.
 
