@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-    Create a tuple containing a string and a number (integer or float).
+    Create a tuple containing a string and a number (integer or float)
 """
 from typing import Tuple, Union
 
