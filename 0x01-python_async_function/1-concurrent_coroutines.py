@@ -10,7 +10,9 @@ wait_random = __import__('0-basic_async_syntax').wait_random
 
 async def wait_n(n: int, max_delay: int) -> List[float]:
     """
-        Executes wait_random multiple times, gathers the results, and returns them in sorted order.
+        Executes wait_random multiple times
+        , gathers the results
+        , and returns them in sorted order.
     """
     tasks = [wait_random(max_delay) for _ in range(n)]
     results = []
