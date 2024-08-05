@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-    This module defines the wait_n function.
+    Module to wait_n
 """
-
-import heapq
 import asyncio
+import heapq
+from typing import List
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 
-async def wait_n(n: int, max_delay: int) -> list[float]:
+async def wait_n(n: int, max_delay: int) -> List[float]:
     """
-        Executes wait_random multiple times and returns the results.
+        Executes wait_random multiple times, gathers the results, and returns them in sorted order.
     """
     tasks = [wait_random(max_delay) for _ in range(n)]
     results = []
@@ -19,8 +19,8 @@ async def wait_n(n: int, max_delay: int) -> list[float]:
     for task in asyncio.as_completed(tasks):
         result = await task
         heapq.heappush(heap, result)
-
+    
     while heap:
         results.append(heapq.heappop(heap))
-
+    
     return results
