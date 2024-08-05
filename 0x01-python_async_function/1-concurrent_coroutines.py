@@ -19,8 +19,8 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
     for task in asyncio.as_completed(tasks):
         result = await task
         heapq.heappush(heap, result)
-    
+
     while heap:
         results.append(heapq.heappop(heap))
-    
+
     return results
