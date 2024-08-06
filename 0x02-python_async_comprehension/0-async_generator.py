@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
-This module defines an asynchronous generator.
+    This module defines an asynchronous generator.
 """
-
 import asyncio
 import random
 
