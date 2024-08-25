@@ -70,7 +70,7 @@ class TestGetJson(TestCase):
         self.assertEqual(result, test_payload)
 
 
-class TestMemoize(unittest.TestCase):
+class TestMemoize(TestCase):
     """Tests the `memoize` function."""
     def test_memoize(self) -> None:
         """Tests `memoize`'s output."""
