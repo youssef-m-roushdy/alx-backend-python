@@ -71,11 +71,13 @@ class TestGetJson(TestCase):
 
 
 class TestMemoize(TestCase):
-    """Tests the `memoize` function."""
     def test_memoize(self) -> None:
         """Tests `memoize`'s output."""
         class TestClass:
             def a_method(self):
+                """
+                Method return 42
+                """
                 return 42
 
             @memoize
