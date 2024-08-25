@@ -82,6 +82,9 @@ class TestMemoize(TestCase):
 
             @memoize
             def a_property(self):
+                """
+                Property return 42 from a_method
+                """
                 return self.a_method()
         with patch.object(
                 TestClass,
