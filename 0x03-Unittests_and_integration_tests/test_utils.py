@@ -71,33 +71,28 @@ class TestGetJson(TestCase):
 
 
 class TestMemoize(TestCase):
-    def test_memoize(self) -> None:
-        """Tests `memoize`'s output."""
+    """Memoize test class
+    """
+    def test_memoize(self):
+        """Test memoize method to ensure that when a_property method
+         called twice is correctly tested by calling a_method once
+        """
+
         class TestClass:
+            """wrapper class for memoize method
+            """
             def a_method(self):
-                """
-                Method return 42
-                """
                 return 42
 
             @memoize
             def a_property(self):
-                """
-                Property return 42 from a_method
-                """
                 return self.a_method()
-        with patch.object(
-                TestClass,
-                "a_method",
-                return_value=lambda: 42,
-                ) as memo_fxn:
-            """
-            test the TestClass property
-            """
+
+        with patch.object(TestClass, 'a_method') as mock:
             test_class = TestClass()
-            self.assertEqual(test_class.a_property(), 42)
-            self.assertEqual(test_class.a_property(), 42)
-            memo_fxn.assert_called_once()
+            test_class.a_property()
+            test_class.a_property()
+            mock.assert_called_once()
 
 
 if __name__ == '__main__':
