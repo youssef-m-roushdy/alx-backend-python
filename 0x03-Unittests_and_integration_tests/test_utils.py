@@ -8,10 +8,6 @@ access_nested_map = __import__("utils").access_nested_map
 
 
 class TestAccessNestedMap(TestCase):
-    """
-    Test cases for the access_nested_map function.
-    """
-
     @parameterized.expand([
         ("test1", {"a": 1}, ("a",), 1),
         ("test2", {"a": {"b": 2}}, ("a",), {"b": 2}),
