@@ -81,6 +81,9 @@ class TestMemoize(TestCase):
 
             @memoize
             def a_property(self):
+                """
+                    Function return 42 from a_method function.
+                """
                 return self.a_method()
 
         # Apply patch as a context manager
