@@ -7,7 +7,7 @@ from unittest.mock import patch
 from parameterized import parameterized
 access_nested_map = __import__("utils").access_nested_map
 get_json = __import__("utils").get_json
-get_json = __import__("utils").get_json
+memoize = __import__("utils").memoize
 
 
 class TestAccessNestedMap(TestCase):
@@ -68,6 +68,36 @@ class TestGetJson(TestCase):
         mock_get.return_value.json.return_value = test_payload
         result = get_json(test_url)
         self.assertEqual(result, test_payload)
+
+
+class TestMemoize(TestCase):
+    def test_memoize(self):
+        """
+        Test that the memoize decorator.
+        """
+        class TestClass:
+            def a_method(self):
+                return 42
+
+            @memoize
+            def a_property(self):
+                return self.a_method()
+
+        # Apply patch as a context manager
+        with patch.object(TestClass, 'a_method', return_value=42) as mock_a_method:
+            # Create an instance of TestClass
+            instance = TestClass()
+
+            # Access the memoized property
+            result1 = instance.a_property
+            result2 = instance.a_property
+
+            # Assert that the property returns the correct result
+            self.assertEqual(result1, 42)
+            self.assertEqual(result2, 42)
+
+            # Assert that a_method is called only once
+            mock_a_method.assert_called_once()
 
 
 if __name__ == '__main__':
