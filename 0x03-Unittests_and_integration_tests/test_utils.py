@@ -3,8 +3,11 @@
 Unit tests for the access_nested_map function.
 """
 from unittest import TestCase
+from unittest.mock import patch
 from parameterized import parameterized
 access_nested_map = __import__("utils").access_nested_map
+get_json = __import__("utils").get_json
+get_json = __import__("utils").get_json
 
 
 class TestAccessNestedMap(TestCase):
@@ -42,6 +45,29 @@ class TestAccessNestedMap(TestCase):
         """
         with self.assertRaises(error):
             access_nested_map(nested_map, path)
+
+
+class TestGetJson(TestCase):
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False}),
+    ])
+    @patch("utils.requests.get")
+    def test_get_json(self, test_url, test_payload, mock_get):
+        """
+        Test get_json function to ensure it returns the correct JSON payload.
+
+        Args:
+            mock_get (Mock): The mock object for requests.get.
+            test_url (str): The URL to be used in the test.
+            test_payload (dict): The JSON payload should be returned by mock.
+
+        Asserts:
+            The result of get_json should match the test_payload.
+        """
+        mock_get.return_value.json.return_value = test_payload
+        result = get_json(test_url)
+        self.assertEqual(result, test_payload)
 
 
 if __name__ == '__main__':
