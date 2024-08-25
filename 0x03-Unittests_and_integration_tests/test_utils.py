@@ -84,11 +84,11 @@ class TestMemoize(TestCase):
                 TestClass,
                 "a_method",
                 return_value=lambda: 42,
-                ) as memo_fxn:
+                ) as memo_mock_func:
             test_class = TestClass()
             self.assertEqual(test_class.a_property(), 42)
             self.assertEqual(test_class.a_property(), 42)
-            memo_fxn.assert_called_once()
+            memo_mock_func.assert_called_once()
 
 
 if __name__ == '__main__':
