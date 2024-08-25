@@ -73,16 +73,19 @@ class TestGetJson(TestCase):
 class TestMemoize(TestCase):
     def test_memoize(self):
         """
-        Test that the memoize decorator.
+        Test that the memoize decorator correctly.
         """
         class TestClass:
             def a_method(self):
+                """
+                A simple method that returns a constant value.
+                """
                 return 42
 
             @memoize
             def a_property(self):
                 """
-                    Function return 42 from a_method function.
+                A property method that returns the result of a_method.
                 """
                 return self.a_method()
 
@@ -90,11 +93,18 @@ class TestMemoize(TestCase):
         with patch.object(TestClass,
                           'a_method',
                           return_value=42) as mock_a_method:
+            # Create an instance of TestClass
             instance = TestClass()
+
+            # Access the memoized property twice
             result1 = instance.a_property
             result2 = instance.a_property
+
+            # Assert that the property returns the correct result
             self.assertEqual(result1, 42)
             self.assertEqual(result2, 42)
+
+            # Assert that a_method is called only once
             mock_a_method.assert_called_once()
 
 
