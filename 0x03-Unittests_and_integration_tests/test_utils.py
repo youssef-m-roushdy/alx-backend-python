@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Unit tests for the access_nested_map function.
+Unit tests for functions.
 """
 from unittest import TestCase
 from unittest.mock import patch
@@ -87,18 +87,11 @@ class TestMemoize(TestCase):
         with patch.object(TestClass,
                           'a_method',
                           return_value=42) as mock_a_method:
-            # Create an instance of TestClass
             instance = TestClass()
-
-            # Access the memoized property
             result1 = instance.a_property
             result2 = instance.a_property
-
-            # Assert that the property returns the correct result
             self.assertEqual(result1, 42)
             self.assertEqual(result2, 42)
-
-            # Assert that a_method is called only once
             mock_a_method.assert_called_once()
 
 
