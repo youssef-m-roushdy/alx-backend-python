@@ -70,42 +70,26 @@ class TestGetJson(TestCase):
         self.assertEqual(result, test_payload)
 
 
-class TestMemoize(TestCase):
-    def test_memoize(self):
-        """
-        Test that the memoize decorator correctly.
-        """
+class TestMemoize(unittest.TestCase):
+    """Tests the `memoize` function."""
+    def test_memoize(self) -> None:
+        """Tests `memoize`'s output."""
         class TestClass:
             def a_method(self):
-                """
-                A simple method that returns a constant value.
-                """
                 return 42
 
             @memoize
             def a_property(self):
-                """
-                A property method that returns the result of a_method.
-                """
                 return self.a_method()
-
-        # Apply patch as a context manager
-        with patch.object(TestClass,
-                          'a_method',
-                          return_value=42) as mock_a_method:
-            # Create an instance of TestClass
-            instance = TestClass()
-
-            # Access the memoized property twice
-            result1 = instance.a_property
-            result2 = instance.a_property
-
-            # Assert that the property returns the correct result
-            self.assertEqual(result1, 42)
-            self.assertEqual(result2, 42)
-
-            # Assert that a_method is called only once
-            mock_a_method.assert_called_once()
+        with patch.object(
+                TestClass,
+                "a_method",
+                return_value=lambda: 42,
+                ) as memo_fxn:
+            test_class = TestClass()
+            self.assertEqual(test_class.a_property(), 42)
+            self.assertEqual(test_class.a_property(), 42)
+            memo_fxn.assert_called_once()
 
 
 if __name__ == '__main__':
